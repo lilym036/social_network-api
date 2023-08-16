@@ -1,33 +1,29 @@
 const { Schema, model } = require('mongoose');
+const Reaction = require('./Reaction');
 
 const thoughtSchema = new Schema(
     {
-        published: {
-          type: Boolean,
-          default: false,
+        thoughtText: { 
+          type: String, 
+          required: true, 
+          minLength: 1, 
+          maxLength: 280,
         },
         createdAt: {
           type: Date,
           default: Date.now,
+          get: (date) => {
+            if (date) return date.toISOString().split("T") [0];
+          },
         },
-        meta: {
-          upvotes: Number,
-          bookmarks: Number,
+        username: { 
+          type: String, 
+          required: true
         },
-        text: {
-          type: String,
-          minLength: 15,
-          maxLength: 500,
-        },
+        reactions: [Reaction],
       },
-      {
-        toJSON: {
-          virtuals: true,
-        },
-        id: false,
-      }
     );
 
-const Thought = model('thought', postSchema);
+const Thought = model('thought', thoughtSchema);
 
 module.exports = Thought;
