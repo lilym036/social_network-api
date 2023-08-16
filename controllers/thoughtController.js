@@ -7,7 +7,7 @@ getThoughts(req, res) {
       .catch((err) => res.status(500).json(err));
   },
 // Gets a single thought using the findOneAndUpdate method. We pass in the ID of the thought and then respond with it, or an error if not found
-  getSingleApplication(req, res) {
+  getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
@@ -59,7 +59,7 @@ getThoughts(req, res) {
   },
 // Deletes a thought from the databa se. Looks for an thought by ID.
   // Then if the thoughtexists, we look for any users associated with the thought based on the thought ID and update the thoughts array for the User.
-  deleteApplication(req, res) {
+  deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought

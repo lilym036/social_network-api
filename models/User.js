@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 
+
+// Schema to create User model
 const userSchema = new Schema(
     {
       username: { type: String, required: true, unique: true, trimmed: true},
@@ -40,7 +42,7 @@ const userSchema = new Schema(
     return this.friends.length;
   });
 
-
+// Initialize User model
 const User = model('user', userSchema);
 
 module.exports = User;
