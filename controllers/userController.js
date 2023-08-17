@@ -10,7 +10,7 @@ getUsers(req, res) {
 // Get a single user
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
-    //   .select('-__v')
+      .select('-__v')
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user with that ID' })
@@ -32,7 +32,7 @@ getUsers(req, res) {
           ? res.status(404).json({ message: 'No user with that ID' })
           : Thought.deleteMany({ _id: { $in: user.applications } })
       )
-      .then(() => res.json({ message: 'User and associated apps deleted!' }))
+      .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
     

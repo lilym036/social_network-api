@@ -1,4 +1,4 @@
-const { Thought, User } = require('../models');
+const { Thought, User} = require('../models');
 
 module.exports = {
 getThoughts(req, res) {
@@ -9,6 +9,7 @@ getThoughts(req, res) {
 // Gets a single thought using the findOneAndUpdate method. We pass in the ID of the thought and then respond with it, or an error if not found
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
+      .select('-__v')
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with that ID' })
@@ -73,7 +74,7 @@ getThoughts(req, res) {
       .then((user) =>
         !user
           ? res.status(404).json({
-              message: 'Thought created but no user with this id!',
+              message: 'Thought deleted but no user with this id!',
             })
           : res.json({ message: 'Thought successfully deleted!' })
       )
@@ -81,7 +82,7 @@ getThoughts(req, res) {
   },
   // Adds a reaction to an application. Adds the entire body of the reaction rather than the ID with the mongodb $addToSet operator.
   addReaction(req, res) {
-    Reaction.findOneAndUpdate(
+    Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $addToSet: { reactions: req.body } },
       { runValidators: true, new: true }
@@ -95,7 +96,7 @@ getThoughts(req, res) {
   },
   // Remove thought reaction. Finds the thought based on ID. It then updates the reactions array associated with the thought by removing it's reactionId from the tags array.
   removeReaction(req, res) {
-    Thoughts.findOneAndUpdate(
+    Thought.findOneAndUpdate(
       { _id: req.params.applicationId },
       { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
