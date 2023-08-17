@@ -22,6 +22,13 @@ const thoughtSchema = new Schema(
         },
         reactions: [Reaction],
       },
+      {
+        toJSON: {
+            virtuals: false,
+            getters: true
+        },
+        id: false,
+    }
     );
 
 // Initialize our Thought model

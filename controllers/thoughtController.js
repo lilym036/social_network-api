@@ -61,7 +61,7 @@ getThoughts(req, res) {
 // Deletes a thought from the databa se. Looks for an thought by ID.
   // Then if the thoughtexists, we look for any users associated with the thought based on the thought ID and update the thoughts array for the User.
   deleteThought(req, res) {
-    Thought.findOneAndRemove({ _id: req.params.thoughtId })
+    Thought.findOneAndDelete({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with this id!' })

@@ -8,14 +8,13 @@ const userSchema = new Schema(
       email: { 
         type: String, 
         required: true, 
-        unique: true},
-      //   validate: {
-      //     validator: function(v) {
-      //         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
-      //     },
-      //     message: "Please enter a valid email",
-      //     required: [true, "Email required"],
-      // },
+        unique: true,
+        // validating that this is an email
+        match: [
+          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+          "Please input a valid email address",
+        ],
+      },
       thoughts: [
         {
           type: Schema.Types.ObjectId,
