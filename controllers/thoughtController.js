@@ -97,7 +97,7 @@ getThoughts(req, res) {
   // Remove thought reaction. Finds the thought based on ID. It then updates the reactions array associated with the thought by removing it's reactionId from the tags array.
   removeReaction(req, res) {
     Thought.findOneAndUpdate(
-      { _id: req.params.applicationId },
+      { _id: req.params.thoughtId },
       { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
     )
