@@ -80,7 +80,7 @@ getThoughts(req, res) {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Adds a reaction to an application. Adds the entire body of the reaction rather than the ID with the mongodb $addToSet operator.
+  // Adds a reaction to a thought. Adds the entire body of the reaction rather than the ID with the mongodb $addToSet operator.
   addReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -94,7 +94,7 @@ getThoughts(req, res) {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Remove thought reaction. Finds the thought based on ID. It then updates the reactions array associated with the thought by removing it's reactionId from the tags array.
+  // Remove thought reaction. Finds the thought based on ID. It then updates the reactions array associated with the thought by removing it's reactionId from the reactions array.
   removeReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },

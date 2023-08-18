@@ -54,7 +54,7 @@ getUsers(req, res) {
       .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
-
+// Add a friend 
   addFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -69,7 +69,7 @@ getUsers(req, res) {
       )
       .catch((err) => res.status(500).json(err));
   },
-
+// Delete a friend 
   deleteFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
